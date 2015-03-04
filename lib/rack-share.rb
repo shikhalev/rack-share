@@ -16,6 +16,13 @@ module Rack
     end
 
     def call env
+      case @rewrite
+      when nil
+        name = env['PATH']
+      when Proc
+        name = @rewrite.call env['PATH']
+      # TODO
+      end
     end
 
   end
